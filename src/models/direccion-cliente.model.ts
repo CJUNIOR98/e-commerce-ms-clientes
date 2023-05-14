@@ -1,6 +1,17 @@
 import {Entity, model, property} from '@loopback/repository';
 
-@model()
+@model({
+  settings: {
+    foreignKeys: {
+      fk_direccion_id_cliente: {
+        name: 'fk_direccion_id_cliente',
+        entity: 'Cliente',
+        entityKey: 'id',
+        foreignKey: 'id_cliente',
+      },
+    },
+  },
+})
 export class DireccionCliente extends Entity {
   @property({
     type: 'number',
@@ -35,4 +46,5 @@ export interface DireccionClienteRelations {
   // describe navigational properties here
 }
 
-export type DireccionClienteWithRelations = DireccionCliente & DireccionClienteRelations;
+export type DireccionClienteWithRelations = DireccionCliente &
+  DireccionClienteRelations;
